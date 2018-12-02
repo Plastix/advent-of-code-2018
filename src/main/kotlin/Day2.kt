@@ -21,7 +21,35 @@ object Day2 {
 
     private fun Pair<Int, Int>.product(): Int = first * second
 
-    fun part2(input: String): Int {
-        TODO()
+    fun part2(input: String): String {
+        val ids = input.splitWhitespace().asSequence()
+        return ids.flatMap { one ->
+            // Get all pairs of strings
+            ids.map { two ->
+                one to two
+            }
+        }.mapNotNull { (string1, string2) ->
+            val (differsByOne, index) = string1.differsByOne(string2)
+            if (differsByOne) {
+                string1.substring(0, index).plus(string1.substring(index + 1, string1.length))
+            } else {
+                null
+            }
+        }.distinct().joinToString(separator = "\n")
+    }
+
+
+    private fun String.differsByOne(other: String): Pair<Boolean, Int> {
+        var differs = 0
+        var differsIndex = -1
+        forEachIndexed { index, c ->
+            if (other[index] != c) {
+                differs++
+                differsIndex = index
+            }
+        }
+
+        return (differs == 1) to differsIndex
     }
 }
+

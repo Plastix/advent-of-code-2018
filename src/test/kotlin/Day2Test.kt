@@ -7,13 +7,13 @@ class Day2Test {
     @Test
     fun `part 1 samples`() {
         assertEquals(12, Day2.part1("""
-        abcdef
-        bababc
-        abbcde
-        abcccd
-        aabcdd
-        abcdee
-        ababab
+            abcdef
+            bababc
+            abbcde
+            abcccd
+            aabcdd
+            abcdee
+            ababab
         """.trimIndent()))
     }
 
@@ -24,11 +24,19 @@ class Day2Test {
 
     @Test
     fun `part 2 samples`() {
-        TODO()
+        assertEquals("fgij", Day2.part2("""
+            abcde
+            fghij
+            klmno
+            pqrst
+            fguij
+            axcye
+            wvxyz
+        """.trimIndent()))
     }
 
     @Test
     fun `part 2`() {
-        TODO()
+        assertEquals("mphcuasvrnjzzkbgdtqeoylva", Day2.part2(getResourceAsString("day2.txt")))
     }
 }
