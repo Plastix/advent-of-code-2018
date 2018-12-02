@@ -1,7 +1,5 @@
 package utils
 
-import com.google.common.io.Resources
-import java.nio.charset.Charset
 import java.util.regex.Pattern
 
 /**
@@ -39,5 +37,6 @@ fun List<String>.toIntList(): List<Int> {
     return map { it.trim().toInt() }
 }
 
-fun getResourceAsString(resourceName: String, charset: Charset = Charsets.UTF_8): String =
-        Resources.toString(Resources.getResource(resourceName), charset)
+fun getResourceAsString(resourceName: String): String {
+    return object {}.javaClass.classLoader.getResource(resourceName).readText()
+}

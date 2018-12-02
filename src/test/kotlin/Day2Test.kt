@@ -4,6 +4,12 @@ import utils.getResourceAsString
 
 class Day2Test {
 
+    companion object {
+        private val INPUT by lazy {
+            getResourceAsString("day2.txt")
+        }
+    }
+
     @Test
     fun `part 1 samples`() {
         assertEquals(12, Day2.part1("""
@@ -19,7 +25,7 @@ class Day2Test {
 
     @Test
     fun `part 1`() {
-        assertEquals(7533, Day2.part1(getResourceAsString("day2.txt")))
+        assertEquals(7533, Day2.part1(INPUT))
     }
 
     @Test
@@ -37,6 +43,6 @@ class Day2Test {
 
     @Test
     fun `part 2`() {
-        assertEquals("mphcuasvrnjzzkbgdtqeoylva", Day2.part2(getResourceAsString("day2.txt")))
+        assertEquals("mphcuasvrnjzzkbgdtqeoylva", Day2.part2(INPUT))
     }
 }
