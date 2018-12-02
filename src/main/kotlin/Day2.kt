@@ -29,8 +29,8 @@ object Day2 {
                 one to two
             }
         }.mapNotNull { (string1, string2) ->
-            val (differsByOne, index) = string1.differsByOne(string2)
-            if (differsByOne) {
+            val (difference, index) = string1.countDifferentChars(string2)
+            if (difference == 1) {
                 string1.substring(0, index).plus(string1.substring(index + 1, string1.length))
             } else {
                 null
@@ -39,17 +39,15 @@ object Day2 {
     }
 
 
-    private fun String.differsByOne(other: String): Pair<Boolean, Int> {
-        var differs = 0
-        var differsIndex = -1
-        forEachIndexed { index, c ->
-            if (other[index] != c) {
-                differs++
-                differsIndex = index
+    private fun String.countDifferentChars(other: String): Pair<Int, Int> {
+        // Pair<Int, Int>: Number of different characters, index of first different character
+        return foldIndexed(0 to -1) { index, acc, char ->
+            if (other[index] != char) {
+                acc.first + 1 to (if (acc.second == -1) index else acc.second)
+            } else {
+                acc
             }
         }
-
-        return (differs == 1) to differsIndex
     }
 }
 
