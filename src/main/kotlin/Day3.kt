@@ -11,7 +11,7 @@ object Day3 {
             input.splitNewlines().asSequence()
                     .getAllClaimedCells()
                     .groupBy { it.second }
-                    .filter { it.value.size >= 2 }
+                    .filter { it.value.size > 1 }
                     .count()
 
     private fun parseInputLine(input: String): List<Int> =
@@ -21,11 +21,10 @@ object Day3 {
 
     private fun Sequence<String>.getAllClaimedCells(): Sequence<Cell> =
             flatMap { line ->
-                val (id, x, y, h, w) = parseInputLine(line)
+                val (id, x, y, width, height) = parseInputLine(line)
 
-                // Calculate list of cells (x, y)
-                (0..(h * w - 1)).asSequence().map { index ->
-                    id to (x + (index / w) to y + (index % w))
+                (0..(height * width - 1)).asSequence().map { index ->
+                    Cell(id, x + (index % width) to y + (index / width))
                 }
             }
 
@@ -33,13 +32,13 @@ object Day3 {
         val claimedCells = input.splitNewlines().asSequence()
                 .getAllClaimedCells()
 
-        val allIds = claimedCells.map { it.first }
         val overlappingIds = claimedCells.groupBy { it.second }
-                .filter { it.value.size >= 2 }.values.flatten()
+                .filter { it.value.size > 1 }.values.flatten()
                 .map { it.first }
                 .toSet()
 
-        return allIds.first { it !in overlappingIds }
+        return claimedCells.map { it.first }
+                .first { it !in overlappingIds }
     }
 }
 
