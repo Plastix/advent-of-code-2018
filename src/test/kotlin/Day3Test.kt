@@ -23,4 +23,19 @@ class Day3Test {
     fun `part 1`() {
         assertEquals(104439, Day3.part1(INPUT))
     }
+
+    @Test
+    fun `part 2 samples`() {
+        assertEquals(3, Day3.part2("""
+            #1 @ 1,3: 4x4
+            #2 @ 3,1: 4x4
+            #3 @ 5,5: 2x2
+        """.trimIndent()))
+    }
+
+    @Test
+    fun `part 2`() {
+        assertEquals(701
+                , Day3.part2(INPUT))
+    }
 }
